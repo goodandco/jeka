@@ -1,1 +1,3 @@
-# jeka
+# Jeka
+
+run ```npm start```
