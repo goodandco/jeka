@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  server:
+    image: goodandco:jeka
+    container_name: server
+    ports:
+     - 1337:1337
+     - 4040:4040
+
+  client:
+    image: goodandco:jeka
+    container_name: client
+    command: ["client"]
+    ports:
+      - 8888:8888
+
