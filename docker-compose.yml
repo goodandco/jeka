@@ -1,18 +1,18 @@
 version: '3'
 
 services:
-  server:
-    build: .
-    image: goodandco:jeka
-    container_name: server
+  jekaserver:
+    build: ./server
+    image: goodandco:jeka-server
+    container_name: jeka-server
     ports:
      - 1337:1337
      - 4040:4040
 
-  client:
-    image: goodandco:jeka
-    container_name: client
-    command: ["client"]
+  jekaclient:
+    build: ./client
+    image: goodandco:jeka-client
+    container_name: jeka-client
     ports:
-      - 8888:8888
+      - 8889:8888
 
