@@ -1,7 +1,7 @@
 {
-  "name": "jekaserver",
+  "name": "jeka-asterisk-server",
   "version": "1.0.0",
-  "description": "Jeka Server",
+  "description": "Jeka Asterisk Server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

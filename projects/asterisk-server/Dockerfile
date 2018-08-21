@@ -1,6 +1,6 @@
 FROM node:10
 
-WORKDIR /usr/src/server-app
+WORKDIR /usr/src/asterisk-server-app
 
 COPY . .
 

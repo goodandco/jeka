@@ -1,15 +1,17 @@
 version: '3'
 
 services:
-  jekaserver:
-    build: ./server
-    image: goodandco:jeka-server
+  jeka-http-server:
+    build: http-server
+    image: goodandco:jeka-http-server
     container_name: jeka-server
     ports:
      - 1337:1337
      - 4040:4040
+    environment:
+     - NODE_ENV=production
 
-  jekaclient:
+  jeka-client:
     build: ./client
     image: goodandco:jeka-client
     container_name: jeka-client
