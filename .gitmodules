@@ -1,0 +1,3 @@
+[submodule "projects/api"]
+	path = projects/api
+	url = git@github.com:goodandco/jeka-api.git
