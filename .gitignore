@@ -1,5 +1,5 @@
 projects/http-server/node_modules
 projects/asterisk-server/node_modules
 projects/client/node_modules
-docker-compose/local/docker-compose.yml
+environment/local/docker-compose.yml
 .idea

@@ -43,7 +43,7 @@ fi
 
 # prepare paths
 CURDIR=$(pwd)
-DIRPATH="${CURDIR}"/docker-compose/"${ENV}"
+DIRPATH="${CURDIR}"/environment/"${ENV}"
 FILEPATH="${DIRPATH}"/docker-compose.yml
 
 echo ENVIRONMENT = "${ENV}"
