@@ -5,16 +5,29 @@ services:
     build: ../../projects/http-server
     image: goodandco:jeka-http-server-dev
     container_name: jeka-http-server-dev
+    expose:
+     - 1338
+     - 4041
     ports:
-     - 1337:1337
-     - 4040:4040
+     - 1338:1338
+     - 4041:4041
     environment:
      - NODE_ENV=production
+     - HTTP_PORT=4041
+     - TCP_PORT=1338
+     - TCP_HOST=127.0.0.1
+     - TOKEN=ololokek
 
   jeka-client-dev:
     build: ../../projects/client
     image: goodandco:jeka-client-dev
     container_name: jeka-client-dev
+    expose:
+      - 8889
     ports:
-      - 8889:8888
+      - 8889:8889
+    environment:
+      - NODE_ENV=production
+      - WEB_SOCKET_URL=ws://127.0.0.1:1338
+      - CLIENT_PORT=8889
 

@@ -28,7 +28,7 @@ new WebSocket.Server({
 asterisk.createServer(context => {
   context.on('variables', vars => {
     const ws = new WebSocket(`ws://${TCP_HOST}:${TCP_PORT}`);
-    ws.on('open', function open() {
+    ws.on('open', () => {
       ws.send(vars.agi_uniqueid);
     });
   });

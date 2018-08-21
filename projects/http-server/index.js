@@ -3,10 +3,7 @@ const http = require('http');
 
 const WebSocket = require('ws');
 
-const HTTP_PORT = 4040;
-const TCP_PORT = 1337;
-const TCP_HOST = '127.0.0.1';
-const TOKEN = "ololokek";
+const {HTTP_PORT, TCP_PORT, TCP_HOST, TOKEN} = process.env;
 
 const clients = {};
 
@@ -23,7 +20,7 @@ new WebSocket.Server({
     }
   });
 
-  ws.on('close', function () {
+  ws.on('close', () => {
     delete clients[id];
   });
 
@@ -45,7 +42,7 @@ http.createServer((request, response) => {
 
   const ws = new WebSocket(`ws://${TCP_HOST}:${TCP_PORT}`);
 
-  ws.on('open', function open() {
+  ws.on('open', () => {
     ws.send(phone);
   });
 }).listen(HTTP_PORT);
