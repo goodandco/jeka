@@ -1,12 +1,14 @@
 # Jeka
 
 
-run ```npm install```
+To setup / stop in production environment run 
 
-run ```npm start```
+```./run.sh --prod --up/--down``` 
 
-run ```npm run client```
+To setup / stop in dev environment run 
 
-## Setup using Docker
+```./run.sh --dev --up/--down``` 
 
-run ```docker-compose up -d```
+For running dev environment add file
+
+```./docker-compose/local/docker-compose.yml```

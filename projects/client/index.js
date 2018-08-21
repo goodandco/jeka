@@ -1,7 +1,6 @@
 const http = require("http");
 
-const PORT = 8888;
-const SOKET_URL = "ws://127.0.0.1:1337";
+const {CLIENT_PORT, WEB_SOCKET_URL} = process.env;
 
 
 new http.Server(function (req, res) {
@@ -44,11 +43,11 @@ new http.Server(function (req, res) {
             };
           }
           
-          start("${SOKET_URL}");
+          start("${WEB_SOCKET_URL}");
           
         </script>
       </html>
     `
   );
-}).listen(PORT);
+}).listen(CLIENT_PORT);
 

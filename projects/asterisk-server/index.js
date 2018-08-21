@@ -1,13 +1,10 @@
 const asterisk = require('agi');
-
 const WebSocket = require('ws');
 
-const AGI_PORT = 4537;
-const TCP_PORT = 1337;
-const TCP_HOST = '127.0.0.1';
-
+const {AGI_PORT, TCP_PORT, TCP_HOST} = process.env;
 
 const clients = {};
+
 
 new WebSocket.Server({
   port: TCP_PORT
@@ -22,16 +19,14 @@ new WebSocket.Server({
     }
   });
 
-  ws.on('close', function () {
+  ws.on('close', () => {
     delete clients[id];
   });
 
 });
 
 asterisk.createServer(context => {
-
   context.on('variables', vars => {
-
     const ws = new WebSocket(`ws://${TCP_HOST}:${TCP_PORT}`);
     ws.on('open', function open() {
       ws.send(vars.agi_uniqueid);
@@ -39,5 +34,4 @@ asterisk.createServer(context => {
   });
 
   context.end();
-
 }).listen(AGI_PORT);

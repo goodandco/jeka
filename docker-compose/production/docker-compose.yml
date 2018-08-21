@@ -1,20 +1,30 @@
 version: '3'
 
 services:
-  jeka-http-server:
-    build: ../../projects/http-server
-    image: goodandco:jeka-http-server
-    container_name: jeka-server
+  jeka-asterisk-server:
+    build: ../../projects/asterisk-server
+    image: goodandco:jeka-asterisk-server
+    container_name: jeka-asterisk-server
+    expose:
+     - 1337
+     - 4040
     ports:
      - 1337:1337
-     - 4040:4040
     environment:
      - NODE_ENV=production
+     - AGI_PORT=4537
+     - TCP_PORT=1337
+     - TCP_HOST=127.0.0.1
 
   jeka-client:
     build: ../../projects/client
     image: goodandco:jeka-client
     container_name: jeka-client
+    expose:
+      - 8888
     ports:
-      - 8889:8888
-
+      - 8888:8888
+    environment:
+      - NODE_ENV=production
+      - WEB_SOCKET_URL=ws://127.0.0.1:1337
+      - CLIENT_PORT=8888

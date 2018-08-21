@@ -6,8 +6,6 @@ COPY . .
 
 RUN npm install
 
-EXPOSE 8888
-
 ENTRYPOINT ["node"]
 
 CMD ["index"]
