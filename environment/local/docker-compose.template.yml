@@ -11,8 +11,10 @@ services:
     ports:
      - 1338:1338
      - 4041:4041
+    networks:
+      - asterisk
     environment:
-     - NODE_ENV=production
+     - NODE_ENV=development
      - HTTP_PORT=4041
      - TCP_PORT=1338
      - TCP_HOST=127.0.0.1
@@ -26,22 +28,63 @@ services:
       - 8889
     ports:
       - 8889:8889
+    networks:
+      - asterisk
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - WEB_SOCKET_URL=ws://127.0.0.1:1338
       - CLIENT_PORT=8889
 
-  jeka-mysql-db:
+  jeka-api-dev:
+    build: ../../projects/api
+    image: goodandco:jeka-api-dev
+    container_name: jeka-api-dev
+    expose:
+      - 4044
+    ports:
+      - 4044:4044
+    networks:
+      - asterisk
+      - mikbill
+
+  jeka-mysql-mikbill:
     image: mysql
-    container_name: jeka-mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
-      - "3306:3306"
+      - 3307:3306
+    networks:
+      mikbill:
+        aliases:
+          - mikbilldb
     environment:
-      MYSQL_DATABASE: asterisk_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: mikbill
+      MYSQL_USER: user123
+      MYSQL_PASSWORD: user123
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - /storage/docker/jeka-mysql-datadir:/var/lib/mysql
+      - /storage/docker/jeka-mysql-mikbill-datadir:/var/lib/mysql
+
+  jeka-mysql-asterisk:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    networks:
+      asterisk:
+        aliases:
+          - asteriskdb
+    environment:
+      MYSQL_DATABASE: asteriskdb
+      MYSQL_USER: user123
+      MYSQL_PASSWORD: user123
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - /storage/docker/jeka-mysql-asteriskdb-datadir:/var/lib/mysql
+
+networks:
+  asterisk:
+    driver: bridge
+  mikbill:
+    driver: bridge
