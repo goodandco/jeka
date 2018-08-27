@@ -56,9 +56,9 @@ services:
             - mikbilldb
       environment:
         MYSQL_DATABASE: mikbill
-        MYSQL_USER:
-        MYSQL_PASSWORD:
-        MYSQL_ROOT_PASSWORD:
+        MYSQL_USER: user123
+        MYSQL_PASSWORD: user123
+        MYSQL_ROOT_PASSWORD: root
       volumes:
         - /storage/docker/jeka-mysql-mikbill-datadir:/var/lib/mysql
 
