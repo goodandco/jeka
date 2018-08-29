@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  jeka-asterisk-server:
+  jeka-websocket-server:
     build: ../../projects/asterisk-server
     image: goodandco:jeka-asterisk-server
     container_name: jeka-asterisk-server
@@ -9,8 +9,6 @@ services:
       - 1337
     ports:
       - 1337:1337
-    networks:
-      - asterisk
     environment:
       - NODE_ENV=production
       - AGI_PORT=4537
@@ -25,12 +23,10 @@ services:
       - 8888
     ports:
       - 8888:8888
-    networks:
-      - asterisk
     environment:
       - NODE_ENV=production
-      - WEB_SOCKET_URL=ws://127.0.0.1:1337
-      - CLIENT_PORT=8888
+      - WEB_SOCKET_URL=
+      - CLIENT_PORT=
 
   jeka-api:
     build: ../../projects/api
@@ -42,48 +38,10 @@ services:
       - 4044:4044
     depends_on:
       - jeka-asteriskdb
-    networks:
-      - asterisk
-      - mikbill
     environment:
-      - ASTERISK_DB_HOST=jeka-asteriskdb
-      - MIKBILL_DB_HOST=jeka-mikbilldb
-
-  jeka-mikbilldb:
-    image: mariadb
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - 3307:3306
-    networks:
-      - mikbill
-    environment:
-      MYSQL_DATABASE: mikbill
-      MYSQL_USER: user123
-      MYSQL_PASSWORD: user123
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - /storage/ssh/storage/docker/jeka-mikbilldb-datadir:/var/lib/mysql
-
-  jeka-asteriskdb:
-    image: mariadb
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - 3306:3306
-    networks:
-      - asterisk
-    environment:
-      MYSQL_DATABASE: asteriskdb
-      MYSQL_USER: user123
-      MYSQL_PASSWORD: user123
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - /storage/ssh/storage/docker/jeka-asteriskdb-datadir:/var/lib/mysql
-
-networks:
-  asterisk:
-    driver: bridge
-  mikbill:
-    driver: bridge
-
+      - ASTERISK_DB_HOST=
+      - ASTERISK_DB_USER=
+      - ASTERISK_DB_PASSWORD=
+      - MIKBILL_DB_HOST=
+      - MIKBILL_DB_USER=
+      - MIKBILL_DB_PASSWORD=
