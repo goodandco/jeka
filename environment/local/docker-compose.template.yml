@@ -49,8 +49,14 @@ services:
       - asterisk
       - mikbill
     environment:
+      - ASTERISK_DB_NAME=asteriskdb
       - ASTERISK_DB_HOST=jeka-asteriskdb
+      - ASTERISK_DB_USER=user123
+      - ASTERISK_DB_PASSWORD=user123
+      - MIKBILL_DB_NAME=mikbill
       - MIKBILL_DB_HOST=jeka-mikbilldb
+      - MIKBILL_DB_USER=user123
+      - MIKBILL_DB_PASSWORD=user123
 
   jeka-mikbilldb:
     image: mariadb
