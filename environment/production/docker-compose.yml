@@ -15,19 +15,6 @@ services:
       - TCP_PORT=1337
       - TCP_HOST=127.0.0.1
 
-  jeka-client:
-    build: ../../projects/client
-    image: goodandco:jeka-client
-    container_name: jeka-client
-    expose:
-      - 8888
-    ports:
-      - 8888:8888
-    environment:
-      - NODE_ENV=production
-      - WEB_SOCKET_URL=
-      - CLIENT_PORT=
-
   jeka-api:
     build: ../../projects/api
     image: goodandco:jeka-api

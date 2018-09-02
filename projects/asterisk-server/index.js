@@ -29,9 +29,11 @@ asterisk.createServer(context => {
   context.on('variables', vars => {
     const ws = new WebSocket(`ws://${TCP_HOST}:${TCP_PORT}`);
     ws.on('open', () => {
-      ws.send(vars.agi_uniqueid);
+      ws.send(vars.agi_callerid);
     });
   });
+
+  // context.on('Hangup', () => {});
 
   context.end();
 }).listen(AGI_PORT);
